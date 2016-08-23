@@ -72,5 +72,17 @@ css:
               small.text-muted style="margin-left: 5px;" 3:20 PM
             p It's raining tacos, from out of the sky, tacos, don't even ask why. Does guac cost extra?
 
-    div.textarea
+    .textarea
+      .input-group
+        .input-group-btn
+          button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+            span.glyphicon.glyphicon-plus
+          ul.dropdown-menu
+            li
+              a href="#" Upload file
+            li
+              a href="#" Add emoji
+        input type="text" class="form-control" id="message-input"
 
+javascript:
+  $("#message-input").val("I don't **think** so. Guac is free on all tacos!");

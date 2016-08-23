@@ -1,15 +1,24 @@
-# slack-prototype
+# README
 
-This is an HTML mockup of a Slack prototype app.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## Dependencies
+Things you may want to cover:
 
-Make sure to install all necessary gems via `bundle install`
+* Ruby version
 
-## Running
+* System dependencies
 
-To run the web app, execute the following command, and visit `localhost:4567/`
+* Configuration
 
-```
-$ ruby app.rb
-```
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

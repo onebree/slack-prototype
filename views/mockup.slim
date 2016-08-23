@@ -1,12 +1,31 @@
 css:
   .sidebar, .messages {
-    padding-top: 20px;
+    padding-top: 15px;
   }
 
   .message {
     margin-bottom: 15px;
   }
 
+  .channel-header {
+    padding-top: 10px;
+    border-left: 2px solid #eee;
+  }
+
+
+.row style="border-bottom: 2px solid #eee;"
+  .col-md-2 style="padding-top: 10px;"
+  .col-md-10.channel-header
+    .row
+      .col-md-10
+        big
+          strong General
+        br
+        small
+          em.text-muted 3 members
+      .col-md-2
+        .form-group
+          input type="text" class="form-control" placeholder="Search"
 
 .row
   .col-md-2
@@ -83,6 +102,7 @@ css:
             li
               a href="#" Add emoji
         input type="text" class="form-control" id="message-input"
+
 
 javascript:
   $("#message-input").val("I don't **think** so. Guac is free on all tacos!");

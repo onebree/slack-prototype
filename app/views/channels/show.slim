@@ -16,6 +16,10 @@ css:
     margin-top: 20px;
   }
 
+  .textarea {
+    padding-bottom: 15px;
+  }
+
 .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
   .text-center
     strong DEVELOPMENT - CHANNEL
@@ -73,13 +77,14 @@ css:
                   p= message.body
 
     .textarea
-      .input-group
-        .input-group-btn
-          button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-            span.glyphicon.glyphicon-plus
-          ul.dropdown-menu
-            li
-              a href="#" Upload file
-            li
-              a href="#" Add emoji
-        input type="text" class="form-control" id="message-input"
+      = form_tag messages_path(:receivable => @channel, :sender_id => 1) do
+        .input-group
+          .input-group-btn
+            button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+              span.glyphicon.glyphicon-plus
+            ul.dropdown-menu
+              li
+                a href="#" Upload file
+              li
+                a href="#" Add emoji
+          = text_field_tag :body, nil, :class => "form-control"

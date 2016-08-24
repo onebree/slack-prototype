@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823184654) do
+ActiveRecord::Schema.define(version: 20160824142340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160823184654) do
     t.integer  "receivable_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "compiled_body"
     t.index ["receivable_type", "receivable_id"], name: "index_messages_on_receivable_type_and_receivable_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end

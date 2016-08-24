@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'kramdown'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

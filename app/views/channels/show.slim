@@ -74,7 +74,7 @@ css:
                   .media-heading
                     strong(style="margin-right: 20px;")= message.sender.full_name
                     small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%-l:%M %p")
-                  p= message.body
+                  = message.compiled_body.html_safe
 
     .textarea
       = form_tag messages_path(:receivable => @channel, :sender_id => 1) do

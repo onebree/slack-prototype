@@ -69,8 +69,8 @@ css:
           - Conversation.all.each do |conversation|
             - active = conversation == receivable ? "active" : ""
             - title = conversation.participants.pluck(:full_name).join(" and ")
-            = link_to title, "#", :class => "list-group-item #{active}"
-          = link_to fa_icon("plus fw", :text => "New conversation"), "#", :class => "list-group-item"
+            = link_to title, conversation_path(conversation), :class => "list-group-item #{active}"
+          button.list-group-item(data-toggle="modal" data-target="#newConversation")= fa_icon("plus fw", :text => "New conversation")
 
   .col-md-10 style="border-left: 2px solid #eee;"
     - if grouped_messages.empty?
@@ -105,3 +105,5 @@ css:
               li
                 a href="#" Add emoji
           = text_field_tag :body, nil, :class => "form-control"
+
+= render :partial => "shared/new_conversation"

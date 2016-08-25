@@ -7,13 +7,29 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    @conversation = Conversation.new(:participant_ids => [1, params[:participant_id]])
-    if @conversation.save
+    current_user = User.find(1)
+    participants = [current_user.id, params[:participant_id].to_i].sort
+
+    @conversation = Conversation.find_by(
+      :participant_one_id => participants[0],
+      :participant_two_id => participants[1]
+    )
+
+    if @conversation
       redirect_to @conversation
     else
-      raise
-      # Render last stored location with modal shown
-      # Show error message -- must have one participant
+      @conversation = Conversation.new(
+        :participant_one_id => participants[0],
+        :participant_two_id => participants[1]
+      )
+
+      if @conversation.save
+        redirect_to @conversation
+      else
+        raise
+        # Render last stored location with modal shown
+        # Show error message -- must have two participant
+      end
     end
   end
 end

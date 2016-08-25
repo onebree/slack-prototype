@@ -94,7 +94,7 @@ css:
                   = message.compiled_body.html_safe
 
     .textarea
-      = form_tag messages_path(:receivable => receivable, :sender_id => 1) do
+      = form_tag messages_path(:receivable_id => receivable.id, :receivable_type => receivable.class.to_s, :sender_id => 1) do
         .input-group
           .input-group-btn
             button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"

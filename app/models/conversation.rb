@@ -3,7 +3,7 @@ class Conversation < ApplicationRecord
 
   validates :participant_one, :participant_two, :presence => true
 
-  def self.participants
+  def participants
     User.find([:participant_one_id, :participant_two_id])
   end
 end

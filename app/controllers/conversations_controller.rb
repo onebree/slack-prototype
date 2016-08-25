@@ -8,12 +8,9 @@ class ConversationsController < ApplicationController
 
   def create
     current_user = User.find(1)
-    participants = [current_user.id, params[:participant_id].to_i].sort
+    participants = [current_user.id, params[:participant_id].to_i]
 
-    @conversation = Conversation.find_by(
-      :participant_one_id => participants[0],
-      :participant_two_id => participants[1]
-    )
+    @conversation = Conversation.find_by_participants(participants[0], participants[1])
 
     if @conversation
       redirect_to @conversation

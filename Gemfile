@@ -35,6 +35,11 @@ gem 'slim'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'kramdown'
+gem 'redis'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

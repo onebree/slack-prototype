@@ -1,24 +1,19 @@
-# README
+# slack-prototype
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
 
-Things you may want to cover:
+- Ruby version 2.2.2 or newer
+- Redis
+- Necessary gems via `bundle install`
 
-* Ruby version
+## Setup
 
-* System dependencies
+Setup the local database:
 
-* Configuration
+```
+$ rake db:setup
+```
 
-* Database creation
+## Running
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run `rails s` and visit `localhost:3000/`

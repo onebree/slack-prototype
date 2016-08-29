@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def index
-    redirect_to channel_path(id: 1)
+    if logged_in?
+      redirect_to channel_path(id: 1)
+    else
+      redirect_to login_path
+    end
   end
 
   def mockup

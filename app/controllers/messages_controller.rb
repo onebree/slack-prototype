@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
       end
 
     receivable.messages.create(
-      :sender_id => params[:sender_id],
+      :sender_id => current_user.id,
       :body => params[:body]
     )
 

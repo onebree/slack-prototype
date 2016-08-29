@@ -2,13 +2,16 @@ class ConversationsController < ApplicationController
   def show
     store_location
 
-    @conversation = Conversation.find(params[:id])
-    @grouped_messages = @conversation.messages.order(:created_at => :asc).group_by { |m| m.created_at.strftime("%A, %B %-d") }
+    if logged_in?
+      @conversation = Conversation.find(params[:id])
+      @grouped_messages = @conversation.messages.order(:created_at => :asc).group_by { |m| m.created_at.strftime("%A, %B %-d") }
+    else
+      redirect_to login_path
+    end
   end
 
   def create
-    current_user = User.find(1)
-    participants = [current_user.id, params[:participant_id].to_i]
+    participants = [current_user.id, params[:participant_id].to_i].sort
 
     @conversation = Conversation.find_by_participants(participants[0], participants[1])
 

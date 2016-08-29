@@ -1,0 +1,17 @@
+.row
+  .col-md-4
+  .col-md-4
+    h1 Sign in
+
+    .panel.panel-default
+      .panel-body
+        = form_for :session, :url => login_path do |f|
+          .form-group
+            = f.label :username
+            = f.text_field :username, :class => "form-control"
+          .form-group
+            = f.label :password
+            = f.password_field :password, :class => "form-control"
+          .text-right
+            = f.submit "Submit", :class => "btn btn-primary"
+  .col-md-4

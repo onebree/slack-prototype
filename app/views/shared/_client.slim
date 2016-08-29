@@ -26,8 +26,10 @@ css:
   }
 
 .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
-  .text-center
+  .col-md-10
     strong= "DEVELOPMENT - #{receivable.class}"
+  .col-md-2
+    .text-right= link_to "Switch account", logout_path, :method => "delete"
 
 .row style="border-bottom: 2px solid #eee;"
   .col-md-2 style="padding-top: 10px;"
@@ -39,8 +41,8 @@ css:
             - if receivable.is_a? Channel
               = receivable.title
             - elsif receivable.is_a? Conversation
-              - participants = receivable.participants.pluck(:full_name).join(" and ")
-              = "Conversation between #{participants}"
+              - other_participant = receivable.participants.find { |x| x != current_user }.full_name
+              = "Conversation with #{other_participant}"
 
         br
         small
@@ -66,9 +68,9 @@ css:
       .panel.panel-default
         .panel-heading Conversations
         .list-group
-          - Conversation.all.each do |conversation|
+          - current_user.conversations.each do |conversation|
             - active = conversation == receivable ? "active" : ""
-            - title = conversation.participants.map { |x| x.full_name }.join(" and ")
+            - title = conversation.participants.find { |x| x != current_user }.full_name
             = link_to title, conversation_path(conversation), :class => "list-group-item #{active}"
           button.list-group-item(data-toggle="modal" data-target="#newConversation")= fa_icon("plus fw", :text => "New conversation")
 
@@ -94,7 +96,7 @@ css:
                   = message.compiled_body.html_safe
 
     .textarea
-      = form_tag messages_path(:receivable_id => receivable.id, :receivable_type => receivable.class.to_s, :sender_id => 1) do
+      = form_tag messages_path(:receivable_id => receivable.id, :receivable_type => receivable.class.to_s) do
         .input-group
           .input-group-btn
             button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"

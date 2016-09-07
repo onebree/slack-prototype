@@ -47,7 +47,7 @@
           h4.text-muted.page-header= day
           = render messages
 
-    #message-input
+    #new_message
       = form_tag messages_path(:receivable_id => receivable.id, :receivable_type => receivable.class.to_s) do
         .input-group
           .input-group-btn

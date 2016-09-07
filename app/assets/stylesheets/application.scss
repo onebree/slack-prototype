@@ -2,3 +2,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+#sidebar, #messages {
+  padding-top: 15px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.receivable-header {
+  padding-top: 10px;
+  border-left: 2px solid #eee;
+}
+
+h4.page-header {
+  margin-top: 20px;
+}
+
+#message-input {
+  padding-bottom: 15px;
+}

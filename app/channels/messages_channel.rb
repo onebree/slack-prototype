@@ -8,6 +8,6 @@ class MessagesChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def speak
+  def send_message(data)
   end
 end

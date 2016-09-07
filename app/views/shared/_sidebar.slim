@@ -1,0 +1,18 @@
+#sidebar
+  .panel.panel-default
+    .panel-heading Group channels
+    .list-group
+      - ChatRoom.order(:title).each do |chat_room|
+        - active = chat_room == receivable ? "active" : ""
+        = link_to chat_room.title, chat_room_path(chat_room), :class => "list-group-item #{active}"
+
+  .panel.panel-default
+    .panel-heading Conversations
+    .list-group
+      - current_user.conversations.each do |conversation|
+        - active = conversation == receivable ? "active" : ""
+        - title = conversation.participants.find { |x| x != current_user }.full_name
+        = link_to title, conversation_path(conversation), :class => "list-group-item #{active}"
+      button.list-group-item(data-toggle="modal" data-target="#newConversation")= fa_icon("plus fw", :text => "New conversation")
+
+= render :partial => "shared/new_conversation"

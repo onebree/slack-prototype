@@ -38,7 +38,7 @@ css:
       .col-md-9
         big
           strong
-            - if receivable.is_a? Channel
+            - if receivable.is_a? ChatRoom
               = receivable.title
             - elsif receivable.is_a? Conversation
               - other_participant = receivable.participants.find { |x| x != current_user }.full_name
@@ -47,7 +47,7 @@ css:
         br
         small
           em.text-muted
-            - if receivable.is_a? Channel
+            - if receivable.is_a? ChatRoom
               = "#{receivable.member_count} members"
             - elsif receivable.is_a? Conversation
               | 2 members
@@ -61,9 +61,9 @@ css:
       .panel.panel-default
         .panel-heading Group channels
         .list-group
-          - Channel.order(:title).each do |channel|
-            - active = channel == receivable ? "active" : ""
-            = link_to channel.title, channel_path(channel), :class => "list-group-item #{active}"
+          - ChatRoom.order(:title).each do |chat_room|
+            - active = chat_room == receivable ? "active" : ""
+            = link_to chat_room.title, chat_room_path(chat_room), :class => "list-group-item #{active}"
 
       .panel.panel-default
         .panel-heading Conversations

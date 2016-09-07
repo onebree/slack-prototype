@@ -4,8 +4,8 @@ class MessagesController < ApplicationController
 
     receivable =
       case params[:receivable_type]
-      when "Channel"
-        Channel.find(params[:receivable_id])
+      when "ChatRoom"
+        ChatRoom.find(params[:receivable_id])
       when "Conversation"
         Conversation.find(params[:receivable_id])
       end

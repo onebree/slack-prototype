@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :channels
+  has_many :chat_rooms
   has_many :messages, :foreign_key => "sender_id"
 
   has_secure_password

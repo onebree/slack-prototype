@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     puts user.nil?
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to channel_path(id: 1)
+      redirect_to chat_room_path(id: 1)
     else
       render :new
     end

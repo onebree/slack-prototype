@@ -34,10 +34,10 @@
 
 .row
   .col-md-2
-    = render :partial => "shared/sidebar"
+    = render :partial => "shared/sidebar", :locals => { :receivable => receivable }
 
   .col-md-10 style="border-left: 2px solid #eee;"
-    #messages
+    #messages data-receivable-type="#{receivable.class}" data-receivable-id="#{receivable.id}"
       - if grouped_messages.empty?
         h4.text-muted.page-header= Date.today.strftime("%A, %B %-d")
         .message

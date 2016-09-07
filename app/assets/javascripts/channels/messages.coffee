@@ -1,17 +1,21 @@
-App.messages = App.cable.subscriptions.create {
-    channel: "MessagesChannel",
-    receivable_type: ""
-    receivable_id: ""
-  },
+$(document).on "turbolinks:load" ->
+  messages = $("#messages")
 
-  connected: ->
-    # Called when the subscription is ready for use on the server
+  if messages.length > 0
+    App.messages = App.cable.subscriptions.create {
+        channel: "MessagesChannel",
+        receivable_type: ""
+        receivable_id: ""
+      },
 
-  disconnected: ->
-    # Called when the subscription has been terminated by the server
+      connected: ->
+        # Called when the subscription is ready for use on the server
 
-  received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
+      disconnected: ->
+        # Called when the subscription has been terminated by the server
 
-  send_message: (message, receivable_type, receivable_id) ->
-    @perform "send_message", message: message, receivable_type: receivable_type, receivable_id: receivable_id
+      received: (data) ->
+        # Called when there's incoming data on the websocket for this channel
+
+      send_message: (message, receivable_type, receivable_id) ->
+        @perform "send_message", message: message, receivable_type: receivable_type, receivable_id: receivable_id

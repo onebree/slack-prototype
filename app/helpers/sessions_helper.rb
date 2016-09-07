@@ -1,4 +1,5 @@
 module SessionsHelper
+
   def store_location
     session[:return_to] = request.fullpath
   end
@@ -9,6 +10,7 @@ module SessionsHelper
   end
 
   def log_out
+    ActionCable.server.disconnect(current_user: @current_user)
     cookies.delete(:user_id)
     session.delete(:user_id)
     @current_user = nil

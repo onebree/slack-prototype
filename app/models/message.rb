@@ -4,6 +4,8 @@ class Message < ApplicationRecord
 
   before_save :compile
 
+  after_create_commit { MessageBroadcastJob.perform_later(self) }
+
   validates :body, :presence => true
 
   def compile

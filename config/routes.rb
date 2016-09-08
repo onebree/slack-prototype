@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get "/mockup", :to => "home#mockup"
 
   resources :chat_rooms, only: [:show]
-  resources :messages, only: [:create]
   resources :conversations, only: [:show, :create]
 
   get    "login"  => "sessions#new",     :as => :login

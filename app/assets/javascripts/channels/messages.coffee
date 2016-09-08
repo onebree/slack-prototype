@@ -2,6 +2,10 @@ $(document).on "turbolinks:load" ->
   messages = $("#messages")
 
   if messages.length > 0
+    messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
+
+    messages_to_bottom()
+
     App.messages = App.cable.subscriptions.create {
         channel: "MessagesChannel",
         receivable_type: ""
@@ -15,7 +19,8 @@ $(document).on "turbolinks:load" ->
         # Called when the subscription has been terminated by the server
 
       received: (data) ->
-        # Called when there's incoming data on the websocket for this channel
+        messages.append data["message"]
+        messages_to_bottom()
 
       send_message: (message, receivable_type, receivable_id) ->
         @perform "send_message", { message: message, receivable_type: receivable_type, receivable_id: receivable_id }

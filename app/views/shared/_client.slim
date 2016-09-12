@@ -48,7 +48,7 @@
           = render messages
 
     #new_message
-      = form_tag messages_path(:receivable_id => receivable.id, :receivable_type => receivable.class.to_s) do
+      = form_for @message, :url => "#" do |f|
         .input-group
           .input-group-btn
             button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
@@ -58,4 +58,6 @@
                 a href="#" Upload file
               li
                 a href="#" Add emoji
-          = text_field_tag :body, nil, :class => "form-control"
+          = hidden_field_tag :receivable_type, receivable.class.to_s
+          = hidden_field_tag :receivable_id, receivable.id
+          = f.text_field :body, :class => "form-control"

@@ -1,4 +1,4 @@
-$(document).on "turbolinks:load" ->
+$(document).on "turbolinks:load", ->
   messages = $("#messages")
 
   if messages.length > 0
@@ -8,8 +8,8 @@ $(document).on "turbolinks:load" ->
 
     App.messages = App.cable.subscriptions.create {
         channel: "MessagesChannel",
-        receivable_type: ""
-        receivable_id: ""
+        receivable_type: messages.data("receivable-type")
+        receivable_id: messages.data("receivable-id")
       },
 
       connected: ->
@@ -25,17 +25,17 @@ $(document).on "turbolinks:load" ->
       send_message: (message, receivable_type, receivable_id) ->
         @perform "send_message", { message: message, receivable_type: receivable_type, receivable_id: receivable_id }
 
-    $("#new_message").on "keypress" (e) ->
+    $("#new_message").on "keypress", (e) ->
       if e && e.keyCode == 13
         e.preventDefault()
         $(this).submit()
 
-    $("#new_message").on "submit" (e) ->
+    $("#new_message").on "submit", (e) ->
       e.preventDefault()
 
-      body            = $(this).find("#body")
+      body            = $(this).find("#message_body")
       receivable_type = messages.data("receivable-type")
-      receivable_id   = messages.data("receivable-type")
+      receivable_id   = messages.data("receivable-id")
 
       if $.trim(body.val()).length > 0
         App.messages.send_message(body.val(), receivable_type, receivable_id)

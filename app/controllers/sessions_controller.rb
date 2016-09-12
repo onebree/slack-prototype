@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(username: params[:session][:username])
-    puts user.nil?
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to chat_room_path(id: 1)

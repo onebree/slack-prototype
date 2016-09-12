@@ -9,6 +9,18 @@ class Message < ApplicationRecord
   validates :body, :presence => true
 
   def compile
-    write_attribute(:compiled_body, Kramdown::Document.new(body).to_html)
+    emojified_body = emojify(body)
+    write_attribute(:compiled_body, Kramdown::Document.new(emojified_body).to_html)
+  end
+
+  def emojify(text)
+    text.to_s.gsub(/:([\w+-]+):/) do |match|
+      if (emoji = Emoji.find_by_alias($1))
+        path = "/images/emoji/#{emoji.image_filename}"
+        %(<img class="emoji" alt="#$1" src="#{path}" width="20" height="20" />)
+      else
+        match
+      end
+    end
   end
 end

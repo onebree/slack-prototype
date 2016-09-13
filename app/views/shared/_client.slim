@@ -38,14 +38,11 @@
 
   .col-md-10 style="border-left: 2px solid #eee;"
     #messages data-receivable-type="#{receivable.class}" data-receivable-id="#{receivable.id}"
-      - if grouped_messages.empty?
-        h4.text-muted.page-header= Date.today.strftime("%A, %B %-d")
-        .message
-          em There are no messages.
-      - else
-        - grouped_messages.each do |day, messages|
-          h4.text-muted.page-header= day
-          = render messages
+      em.message This is the beginning of the message history.
+      - grouped_messages.each do |day, messages|
+        .date
+          = day
+        = render messages
 
     #new_message
       = form_for @message, :url => "#" do |f|

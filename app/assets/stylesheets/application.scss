@@ -16,10 +16,6 @@
   border-left: 2px solid #eee;
 }
 
-h4.page-header {
-  margin-top: 20px;
-}
-
 #new_message {
   padding-bottom: 15px;
 }
@@ -32,4 +28,11 @@ h4.page-header {
 
 img.emoji {
   vertical-align: middle;
+}
+
+.date {
+  @extend h4;
+  @extend .text-muted;
+  @extend .page-header;
+  margin-top: 20px;
 }

@@ -19,6 +19,21 @@ $(document).on "turbolinks:load", ->
         # Called when the subscription has been terminated by the server
 
       received: (data) ->
+        $date = $(".date")
+        wdays  = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+        today = new Date
+        wday  = today.getDay()
+        day   = today.getDate()
+        month = today.getMonth()
+
+        date_header = "#{wdays[wday]}, #{months[month]} #{day}"
+
+        if $date.length == 0 || $date.last().text() != date_header
+          messages.append "<div class='date'>#{date_header}</div>"
+          $date = $(".date")
+
         messages.append data["message"]
         messages_to_bottom()
 

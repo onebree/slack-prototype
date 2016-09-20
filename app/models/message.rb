@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  mount_uploader :attachment, AttachmentUploader
+
   belongs_to :receivable, :polymorphic => true
   belongs_to :sender, :class_name => "User"
 
@@ -6,7 +8,7 @@ class Message < ApplicationRecord
 
   after_create_commit { MessageBroadcastJob.perform_later(self) }
 
-  validates :body, :presence => true
+  validates :body, :presence => true, :if => Proc.new { |m| m.attachment.file.nil? }
 
   def compile
     emojified_body = emojify(body)

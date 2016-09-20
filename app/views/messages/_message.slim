@@ -7,3 +7,5 @@
         strong(style="margin-right: 20px;")= message.sender.full_name
         small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%-l:%M %p")
       = message.compiled_body.html_safe
+      - if message.attachment?
+        = link_to message.attachment_identifier, message.attachment.url

@@ -1,0 +1,21 @@
+#upload.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog.modal-sm role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          span &times;
+        h4.modal-title Upload a file
+      = form_for Message.new do |f|
+        = f.hidden_field :receivable_type, :value => receivable.class.to_s
+        = f.hidden_field :receivable_id, :value => receivable.id
+
+        .modal-body
+          .form-group
+            = f.label :attachment
+            = f.file_field :attachment
+          .form-group
+            = f.label :body, "Message (optional)"
+            = f.text_area :body, :class => "form-control"
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+          = f.submit "Upload", :class => "btn btn-primary"

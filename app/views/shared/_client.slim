@@ -46,15 +46,12 @@
 
     #new_message
       = form_for @message, :url => "#" do |f|
+        = f.hidden_field :receivable_type, :value => receivable.class.to_s
+        = f.hidden_field :receivable_id, :value => receivable.id
         .input-group
           .input-group-btn
-            button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-              span.glyphicon.glyphicon-plus
-            ul.dropdown-menu
-              li
-                a href="#" Upload file
-              li
-                a href="#" Add emoji
-          = hidden_field_tag :receivable_type, receivable.class.to_s
-          = hidden_field_tag :receivable_id, receivable.id
+            button.btn.btn-default(type="button" data-toggle="modal" data-target="#upload")= fa_icon("file-o fw")
+            button.btn.btn-default= fa_icon("smile-o fw")
           = f.text_field :body, :class => "form-control"
+
+    = render :partial => "shared/upload", :locals => { :receivable => receivable }

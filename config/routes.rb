@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :chat_rooms, only: [:show]
   resources :conversations, only: [:show, :create]
+  resources :messages, :only => [:create]
 
   get    "login"  => "sessions#new",     :as => :login
   post   "login"  => "sessions#create"

@@ -8,7 +8,8 @@
 }
 
 .message {
-  margin-bottom: 15px;
+  padding-top: 5px;
+  margin-bottom: 10px;
 }
 
 .receivable-header {
@@ -20,7 +21,7 @@
   padding-bottom: 15px;
 }
 
-#messages {
+#messages, #search_results {
   padding-top: 15px;
   max-height: 600px;
   overflow-y: auto;
@@ -35,4 +36,5 @@ img.emoji {
   @extend .text-muted;
   @extend .page-header;
   margin-top: 20px;
+  margin-bottom: 10px;
 }

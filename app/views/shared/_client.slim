@@ -29,8 +29,9 @@
             - elsif receivable.is_a? Conversation
               | 2 members
       .col-md-3
-        .form-group
-          input type="text" class="form-control" placeholder="Search"
+        = form_tag(search_path, :method => :get, :id => "search_form") do
+          .form-group
+            = text_field_tag :search, nil, :class => "form-control", :placeholder => "Search"
 
 .row
   .col-md-2
@@ -60,4 +61,13 @@ javascript:
   $("#upload_btn").on("click", function() {
     var body = $("#message_body").val();
     $("#message_attachment_body").val(body);
+  });
+
+  $("#search_form").on("submit", function() {
+    var search = $("#search").val();
+    if (search == undefined || search == "") {
+      return false;
+    } else {
+      return true;
+    }
   });

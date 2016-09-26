@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post   "login"  => "sessions#create"
   delete "logout" => "sessions#destroy", :as => :logout
 
+  get  "/search" => "home#search", :as => :search
+
   mount ActionCable.server => "/cable"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

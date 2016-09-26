@@ -13,6 +13,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:receivable_type, :receivable_id, :body, :attachment)
+    params.require(:message).permit!
   end
 end

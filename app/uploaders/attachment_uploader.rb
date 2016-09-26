@@ -6,8 +6,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
+    Rails.logger.info "STEVENS - production"
     storage :fog
   else
+    Rails.logger.info "STEVENS - development"
     storage :file
   end
 

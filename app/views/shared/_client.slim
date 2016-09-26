@@ -50,8 +50,14 @@
         = f.hidden_field :receivable_id, :value => receivable.id
         .input-group
           .input-group-btn
-            button.btn.btn-default(type="button" data-toggle="modal" data-target="#upload")= fa_icon("file-o fw")
+            button.btn.btn-default(type="button" data-toggle="modal" data-target="#upload" id="upload_btn")= fa_icon("file-o fw")
             button.btn.btn-default= fa_icon("smile-o fw")
           = f.text_field :body, :class => "form-control"
 
     = render :partial => "shared/upload", :locals => { :receivable => receivable }
+
+javascript:
+  $("#upload_btn").on("click", function() {
+    var body = $("#message_body").val();
+    $("#message_attachment_body").val(body);
+  });

@@ -15,7 +15,7 @@
             = f.file_field :attachment
           .form-group
             = f.label :body, "Message (optional)"
-            = f.text_area :body, :class => "form-control"
+            = f.text_area :body, :class => "form-control", :id => "message_attachment_body"
         .modal-footer
           button.btn.btn-default type="button" data-dismiss="modal" Close
           = f.submit "Upload", :class => "btn btn-primary"

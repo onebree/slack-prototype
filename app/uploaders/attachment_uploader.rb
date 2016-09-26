@@ -5,13 +5,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production?
-    Rails.logger.info "STEVENS - production"
-    storage :fog
-  else
-    Rails.logger.info "STEVENS - development"
-    storage :file
-  end
+  # storage :file
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

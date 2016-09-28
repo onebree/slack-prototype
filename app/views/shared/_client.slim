@@ -45,6 +45,9 @@
           = day
         = render messages
 
+.row
+  .col-md-2
+  .col-md-10 style="border-left: 2px solid #eee;"
     #new_message
       = form_for @message, :url => "#" do |f|
         = f.hidden_field :receivable_type, :value => receivable.class.to_s

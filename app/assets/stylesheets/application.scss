@@ -24,7 +24,7 @@
 #messages, #search_results {
   padding-top: 15px;
   height: calc(100vh - 167px);
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 img.emoji {

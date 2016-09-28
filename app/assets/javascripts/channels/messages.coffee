@@ -1,11 +1,14 @@
 $(document).on "turbolinks:load", ->
   messages = $("#messages")
 
-  if messages.length > 0
-    messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
+  scroll_to_bottom = ->
+    messages.scrollTop(2000)
 
-    messages_to_bottom()
+  console.log(location.hash)
+  unless location.hash
+    scroll_to_bottom()
 
+  if messages.length > 1
     App.messages = App.cable.subscriptions.create {
         channel: "MessagesChannel",
         receivable_type: messages.data("receivable-type")
@@ -35,7 +38,7 @@ $(document).on "turbolinks:load", ->
           $date = $(".date")
 
         messages.append data["message"]
-        messages_to_bottom()
+        scroll_to_bottom()
 
       send_message: (message, receivable_type, receivable_id) ->
         @perform "send_message", { message: message, receivable_type: receivable_type, receivable_id: receivable_id }

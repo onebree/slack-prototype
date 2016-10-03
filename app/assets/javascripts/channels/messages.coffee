@@ -1,11 +1,10 @@
-$(document).on "turbolinks:load", ->
+$(document).ready ->
   messages = $("#messages")
 
   scroll_to_bottom = ->
-    messages.scrollTop(2000)
+    messages.scrollTop(messages[0].scrollHeight)
 
-  console.log(location.hash)
-  unless location.hash
+  if location.hash == ""
     scroll_to_bottom()
 
   if messages.length > 1

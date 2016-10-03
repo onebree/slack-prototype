@@ -14,5 +14,5 @@
             - path = conversation_path(options)
           = link_to date, path
       = message.compiled_body.html_safe
-      - if message.attachment?
-        = link_to message.attachment_identifier, message.attachment.url
+      - if message.file
+        = link_to message.file_filename, message.file_url

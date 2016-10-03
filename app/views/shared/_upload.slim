@@ -11,8 +11,8 @@
 
         .modal-body
           .form-group
-            = f.label :attachment
-            = f.file_field :attachment
+            = f.label :file
+            = f.attachment_field :file
           .form-group
             = f.label :body, "Message (optional)"
             = f.text_area :body, :class => "form-control", :id => "message_attachment_body"

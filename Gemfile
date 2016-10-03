@@ -37,18 +37,19 @@ gem 'font-awesome-rails'
 gem 'kramdown'
 gem 'redis'
 gem 'gemoji'
-gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
 gem 'mini_magick'
 gem 'textacular', :github => "textacular/textacular"
+gem "refile", require: "refile/rails", :github => "madriska/refile", :branch => "rails5"
+gem "rest-client", "~> 2.0.0"
+gem "sinatra", "~> 2.0.0.beta2"
 
 group :production do
-  gem 'fog-aws'
+  gem 'refile-s3'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails'
 end
 
 group :development do

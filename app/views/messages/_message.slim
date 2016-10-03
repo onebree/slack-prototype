@@ -1,18 +1,11 @@
-.message(id=message.id)
+.message
   .media
     .media-left
       img.media-object src="http://placehold.it/36x36"
     .media-body
       .media-heading
         strong(style="margin-right: 20px;")= message.sender.full_name
-        small.text-muted(style="margin-left: 5px;")
-          - date = message.created_at.strftime("%-l:%M %p")
-          - options = { :id => message.receivable_id, :anchor => message.id }
-          - if message.receivable_type == "ChatRoom"
-            - path = chat_room_path(options)
-          - elsif message.receivable_type == "Conversation"
-            - path = conversation_path(options)
-          = link_to date, path
+        small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%-l:%M %p")
       = message.compiled_body.html_safe
       - if message.file
         = link_to message.file_filename, message.file_url

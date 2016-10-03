@@ -1,4 +1,4 @@
-$(document).ready ->
+$(document).on "turbolinks:load", ->
   messages = $("#messages")
 
   scroll_to_bottom = ->

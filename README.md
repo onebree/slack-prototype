@@ -1,24 +1,31 @@
-# README
+# slack-prototype
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
 
-Things you may want to cover:
+- Ruby version 2.2.2 or newer
+- Redis (stable version)
+- Necessary gems via `bundle install`
 
-* Ruby version
+### Installing Redis
 
-* System dependencies
+Run the following commands in order to install the latest stable version of Redis:
 
-* Configuration
+```
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+make install
+```
 
-* Database creation
+## Setup
 
-* Database initialization
+Setup the local database:
 
-* How to run the test suite
+```
+$ rake db:setup
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running
 
-* Deployment instructions
-
-* ...
+Run `rails s` and visit `localhost:3000/`

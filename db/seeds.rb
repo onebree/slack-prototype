@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.new(:username => "hunter", :password => "rubyist_0")
+user.save
+
+3.times do |n|
+  user.messages.create(:body => "This is message number #{n}.")
+end

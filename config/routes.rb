@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root "messages#index"
   
-  resources :messages, only: [:index]
+  resources :messages, only: [:index, :create]
+
   get "/mockup" => "messages#mockup"
 
   get    "login"  => "sessions#new",     :as => :login

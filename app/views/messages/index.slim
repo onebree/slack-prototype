@@ -3,106 +3,15 @@ css:
     padding-top: 15px;
   }
 
-  .message {
-    margin-bottom: 15px;
-  }
-
-  .channel-header {
-    padding-top: 10px;
-    border-left: 2px solid #eee;
-  }
-
-
-.row style="border-bottom: 2px solid #eee;"
-  .col-md-2 style="padding-top: 10px;"
-  .col-md-10.channel-header
-    .row
-      .col-md-10
-        big
-          strong General
-        br
-        small
-          em.text-muted 3 members
-      .col-md-2
-        .form-group
-          input type="text" class="form-control" placeholder="Search"
-
 .row
   .col-md-2
     .sidebar
       .panel.panel-default
-        .panel-heading Group channels
-        ul.list-group
-          li.list-group-item.active General
-          li.list-group-item Random
-
-      .panel.panel-default
         .panel-heading Users
         ul.list-group
-          li.list-group-item Gregory Brown
-          li.list-group-item Jordan Byron
-          li.list-group-item Hunter Stevens
+          - User.pluck(:username).each do |user|
+            li.list-group-item= user
 
   .col-md-10 style="border-left: 2px solid #eee;"
-    .messages
-      .message
-        .media
-          .media-left
-            img.media-object src="http://placehold.it/36x36"
-          .media-body
-            .media-heading
-              strong style="margin-right: 20px;" Brad Ediger
-              small.text-muted style="margin-left: 5px;" 2:58 PM
-            p
-              em Brad has uploaded an image.
-            p
-              img src="http://placehold.it/350x250"
-
-      .message
-        .media
-          .media-left
-            img.media-object src="http://placehold.it/36x36"
-          .media-body
-            .media-heading
-              strong style="margin-right: 20px;" Brad Ediger
-              small.text-muted style="margin-left: 5px;" 3:00 PM
-            p
-              | Every day is taco ipsum tuesday. 
-              strong Can you put some peppers and onions on that? 
-              | 50 cent tacos! I'll take 30. Add in a few el Pastor with guac and diced onions. BARBACOA!!
-
-      .message
-        .media
-          .media-left
-            img.media-object src="http://placehold.it/36x36"
-          .media-body
-            .media-heading
-              strong style="margin-right: 20px;" Hunter Stevens
-              small.text-muted style="margin-left: 5px;" 3:17 PM
-            p Let's do a beef and a chicken, and one with both. Ooh, with diced onions and a pinch of cilantro.
-
-      .message
-        .media
-          .media-left
-            img.media-object src="http://placehold.it/36x36"
-          .media-body
-            .media-heading
-              strong style="margin-right: 20px;" Gregory Brown
-              small.text-muted style="margin-left: 5px;" 3:20 PM
-            p It's raining tacos, from out of the sky, tacos, don't even ask why. Does guac cost extra?
-
-    .textarea
-      .input-group
-        .input-group-btn
-          button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-            span.glyphicon.glyphicon-plus
-          ul.dropdown-menu
-            li
-              a href="#" Upload file
-            li
-              a href="#" Add emoji
-        input type="text" class="form-control" id="message-input"
-
-
-javascript:
-  $("#message-input").val("I don't **think** so. Guac is free on all tacos!");
+    = render "messages"
+    = render "message_form"

@@ -1,0 +1,10 @@
+scss:
+  #messages {
+    padding-top: 15px;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
+#messages.messages
+  - if @messages.any?
+    = render @messages

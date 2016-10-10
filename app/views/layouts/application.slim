@@ -8,9 +8,14 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
     meta charset="utf-8"
-    meta http-equiv="X-UA-Compatible" content="IE=edge"
-    meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
     .container-fluid
+      - if Rails.env.development?
+        .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
+          .col-md-10
+            strong= "DEVELOPMENT"
+          .col-md-2
+            .text-right= link_to "Switch account", logout_path, :method => "delete"
+
       == yield

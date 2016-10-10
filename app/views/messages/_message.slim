@@ -1,0 +1,15 @@
+scss:
+  .message {
+    margin-bottom: 15px;
+  }
+
+
+.message
+  .media
+    .media-left
+      img.media-object src="http://placehold.it/36x36"
+    .media-body
+      .media-heading
+        strong(style="margin-right: 20px;")= message.user.username
+        small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%b %-d at %-l:%M %p")
+      = message.body

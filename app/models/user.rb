@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   NAME_REGEX = /+w/
 
+  has_many :messages
+
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false },
                        :format => { :with => /\A#{NAME_ERGEX}\z/i },
                        :length => { :maximum => 15 }

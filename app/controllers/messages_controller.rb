@@ -10,8 +10,7 @@ class MessagesController < ApplicationController
     message = current_user.messages.build(message_params)
     if message.save
       ActionCable.server.broadcast "room_channel",
-                                   :body     => message.body,
-                                   :username => message.user.username
+                                   :message => render_message(message)
       head :ok
     end
   end
@@ -23,5 +22,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:body)
+  end
+
+  def render_message(message)
+    render(:partial => "message", :locals => { :message => message })
   end
 end

@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-- Ruby version 2.2.2 or newer
+- Ruby version 2.3.1
 - Redis (stable version)
 - Necessary gems via `bundle install`
 

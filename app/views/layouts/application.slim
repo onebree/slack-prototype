@@ -11,11 +11,10 @@ html
 
   body
     .container-fluid
-      - if Rails.env.development?
-        .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
-          .col-md-10
-            strong= "DEVELOPMENT"
-          .col-md-2
-            .text-right= link_to "Switch account", logout_path, :method => "delete"
+      .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
+        .col-md-10
+          strong= "DEVELOPMENT"
+        .col-md-2
+          .text-right= link_to "Switch account", logout_path, :method => "delete"
 
       == yield

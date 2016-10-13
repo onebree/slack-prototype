@@ -3,6 +3,12 @@ scss:
     margin-bottom: 15px;
   }
 
+  blockquote {
+    font-size: 14px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+  }
 
 .message
   .media
@@ -12,4 +18,4 @@ scss:
       .media-heading
         strong(style="margin-right: 20px;")= message.user.username
         small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%b %-d at %-l:%M %p")
-      = message.body
+      = sanitize markdown_to_html(message.body)

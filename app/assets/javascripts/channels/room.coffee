@@ -16,7 +16,7 @@ $(document).on "turbolinks:load", ->
 
 submit_message = () ->
   $("#message_body").on "keydown", (event) ->
-    if event.keyCode is 13
+    if event.keyCode is 13 && !event.shiftKey
       $("form#new_message").submit()
       event.target.value = ""
       event.preventDefault()

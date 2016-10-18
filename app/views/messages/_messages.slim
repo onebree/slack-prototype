@@ -3,8 +3,9 @@ scss:
     padding-top: 15px;
     height: calc(100vh - 150px);
     overflow-y: scroll;
+    padding-right: 15px;
   }
 
-#messages.messages
+#messages
   - if @messages.any?
     = render @messages

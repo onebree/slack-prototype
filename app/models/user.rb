@@ -2,6 +2,7 @@ class User < ApplicationRecord
   NAME_REGEX = /\w+/
 
   has_many :messages
+  has_many :rooms
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false },
                        :format => { :with => /\A#{NAME_REGEX}\z/i },

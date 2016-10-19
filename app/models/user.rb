@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :messages
   has_many :room_users
-  has_many :rooms, :though => :room_users
+  has_many :rooms, :through => :room_users
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false },
                        :format => { :with => /\A#{NAME_REGEX}\z/i },
@@ -12,4 +12,12 @@ class User < ApplicationRecord
   validates :password, :presence => true, :length => { :minimum => 8 }
 
   has_secure_password
+
+  after_create :join_main_room
+
+  private
+
+  def join_main_room
+    rooms.push Room.find_by(:name => "general")
+  end
 end

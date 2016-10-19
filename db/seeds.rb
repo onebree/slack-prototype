@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+room = Room.create!(:name => "general")
+
 hunter = User.create!(:username => "hunter", :password => "rubyist_0")
-hunter.rooms.create(:name => "general")
 
 steven = User.create!(:username => "steven", :password => "rubyist_1")
 

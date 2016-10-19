@@ -6,6 +6,6 @@ scss:
     padding-right: 15px;
   }
 
-#messages
+#messages(data-room-id="#{@room.id}")
   - if @messages.any?
     = render @messages

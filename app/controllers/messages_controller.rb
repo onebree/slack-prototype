@@ -15,14 +15,15 @@ class MessagesController < ApplicationController
 
     if message.save
       ActionCable.server.broadcast "room_#{@room.id}_channel",
-                                   :message => render_message(message)
+                                   :message => render_message(message),
+                                   :room_id => @room.id
       head :ok
 
       message.mentions.each do |mention|
         ActionCable.server.broadcast "room_#{@room.id}_channel_user_#{mention.id}",
                                      :mention      => true,
                                      :mentioned_by => message.user.username,
-                                     :room         => @room.name
+                                     :room_name    => @room.name
       end
     end
   end

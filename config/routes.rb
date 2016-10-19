@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root "messages#index"
   
-  resources :messages, only: [:index, :create]
+  resources :rooms, :only => [:show] do
+    resources :messages, :only => [:index, :create]
+  end
 
   get "/mockup" => "messages#mockup"
 

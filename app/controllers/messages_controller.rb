@@ -2,21 +2,27 @@ class MessagesController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @messages = Message.all
-    @message = current_user.messages.build
+    @room     = Room.find(params[:room_id])
+    @messages = @room.messages.order(:created_at => :asc)
+    @message  = @room.messages.build(:user => current_user)
   end
 
   def create
-    message = current_user.messages.build(message_params)
+    @room = Room.find(params[:room_id])
+
+    message = @room.messages.build(message_params)
+    message.user = current_user
+
     if message.save
-      ActionCable.server.broadcast "room_channel",
+      ActionCable.server.broadcast "room_#{@room.id}_channel",
                                    :message => render_message(message)
       head :ok
 
       message.mentions.each do |mention|
-        ActionCable.server.broadcast "room_channel_user_#{mention.id}",
+        ActionCable.server.broadcast "room_#{@room.id}_channel_user_#{mention.id}",
                                      :mention      => true,
-                                     :mentioned_by => message.user.username
+                                     :mentioned_by => message.user.username,
+                                     :room         => @room.name
       end
     end
   end

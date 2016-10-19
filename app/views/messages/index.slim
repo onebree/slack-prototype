@@ -7,6 +7,12 @@ scss:
   .col-md-2
     .sidebar
       .panel.panel-default
+        .panel-heading Rooms
+        ul.list-group
+          - Room.pluck(:name).each do |room|
+            li.list-group-item= room
+
+      .panel.panel-default
         .panel-heading Users
         ul.list-group
           - User.pluck(:username).each do |user|

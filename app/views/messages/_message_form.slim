@@ -1,15 +1,15 @@
 scss:
+  #message-form {
+    padding-bottom: 15px;
+  }
+
   textarea#message_body {
     line-height: 1.15em;
     resize: none;
   }
-  
-  .message-form {
-    padding-bottom: 15px;
-  }
 
-.message-form
-  = form_for(@message, :remote => true) do |f|
+#message-form
+  = form_for [@room, @message], :remote => true do |f|
     .input-group
       span.input-group-addon.btn.btn-default= fa_icon("paperclip lg fw")
       span.input-group-addon.btn.btn-default= fa_icon("smile-o lg fw")

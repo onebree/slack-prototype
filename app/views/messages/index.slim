@@ -15,23 +15,27 @@ scss:
       big
         strong= "#" + @room.name
       br
-      small.text-muted= pluralize(@room.users.count, "users")
+      small.text-muted= pluralize(@room.users.count, "user")
 
 .row
   .col-md-2
     .sidebar
-      .panel.panel-default
-        .panel-heading Rooms
-        ul.list-group
-          - Room.pluck(:name).each do |room|
-            li.list-group-item= room
+      .list-group
+        .list-group-item style="background-color: #f5f5f5;" Rooms
+        - current_user.rooms.each do |room|
+          - active = @room == room ? "active" : ""
+          = link_to room.name, room_messages_path(room), :class => "list-group-item #{active}"
+        button.list-group-item(data-toggle="modal" data-target="#newRoom")
+          | Create a new room
+          span.pull-right= fa_icon("plus")
 
-      .panel.panel-default
-        .panel-heading Users
-        ul.list-group
-          - User.pluck(:username).each do |user|
-            li.list-group-item= user
+      ul.list-group
+        li.list-group-item style="background-color: #f5f5f5;" Users
+        - User.pluck(:username).each do |user|
+          li.list-group-item= user
 
   .col-md-10 style="border-left: 2px solid #eee;"
     = render "messages"
     = render "message_form"
+
+= render :partial => "rooms/new_room"

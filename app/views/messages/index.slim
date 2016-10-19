@@ -3,6 +3,20 @@ scss:
     padding-top: 15px;
   }
 
+  .header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+.row style="border-bottom: 2px solid #eee;"
+  .col-md-2
+  .col-md-10 style="border-left: 2px solid #eee;"
+    .header
+      big
+        strong= "#" + @room.name
+      br
+      small.text-muted= pluralize(@room.users.count, "users")
+
 .row
   .col-md-2
     .sidebar

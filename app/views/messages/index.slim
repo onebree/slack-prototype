@@ -3,15 +3,42 @@ scss:
     padding-top: 15px;
   }
 
+  .header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+.row style="border-bottom: 2px solid #eee;"
+  .col-md-2
+  .col-md-10 style="border-left: 2px solid #eee;"
+    .header
+      big
+        strong.pull-left(style="margin-right: 20px;")= "#" + @room.name
+        - unless @room.id == 1
+          = link_to fa_icon("sign-out"), room_room_user_path(:id => @room), :method => :delete, :class => "btn btn-default btn-xs"
+
 .row
   .col-md-2
     .sidebar
-      .panel.panel-default
-        .panel-heading Users
-        ul.list-group
-          - User.pluck(:username).each do |user|
-            li.list-group-item= user
+      .list-group
+        button.list-group-item data-toggle="modal" data-target="#searchRooms" style="background-color: #f5f5f5;"
+          | Rooms
+          span.pull-right= fa_icon("search")
+        - current_user.rooms.each do |room|
+          - active = @room == room ? "active" : ""
+          = link_to "#" + room.name, room_messages_path(room), :class => "list-group-item #{active}"
+        button.list-group-item(data-toggle="modal" data-target="#newRoom")
+          | Create a new room
+          span.pull-right= fa_icon("plus")
+
+      ul.list-group
+        li.list-group-item style="background-color: #f5f5f5;" Users
+        - User.pluck(:username).each do |user|
+          li.list-group-item= user
 
   .col-md-10 style="border-left: 2px solid #eee;"
     = render "messages"
     = render "message_form"
+
+= render :partial => "rooms/new_room"
+= render :partial => "rooms/search_rooms"

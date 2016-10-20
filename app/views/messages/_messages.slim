@@ -1,11 +1,11 @@
 scss:
   #messages {
     padding-top: 15px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 200px);
     overflow-y: scroll;
     padding-right: 15px;
   }
 
-#messages
+#messages(data-room-id="#{@room.id}")
   - if @messages.any?
     = render @messages

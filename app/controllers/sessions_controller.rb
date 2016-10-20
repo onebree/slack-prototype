@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  def index
+    redirect_to room_messages_path(1)
+  end
+
   def new
   end
 
@@ -6,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:session][:username])
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to messages_path
+      redirect_to room_messages_path(1)
     else
       render :new
     end

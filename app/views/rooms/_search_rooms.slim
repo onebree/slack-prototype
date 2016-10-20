@@ -1,0 +1,17 @@
+#searchRooms.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog.modal-sm role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          span &times;
+        h4.modal-title Search for rooms
+      .modal-body
+        label.control-label Available rooms to join
+        .list-group
+          - rooms = Room.where.not(:id => RoomUser.select(:room_id).where(:user_id => current_user.id))
+          - rooms.each do |room|
+            = link_to(room_room_users_path(room), :method => :post, :class => "list-group-item") do
+              = "#" + room.name
+              span.pull-right= fa_icon("sign-in")
+      .modal-footer
+        button.btn.btn-default type="button" data-dismiss="modal" Close

@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-hunter = User.new(:username => "hunter", :password => "rubyist_0")
-hunter.save
+room = Room.create!(:name => "general")
 
-steven = User.new(:username => "steven", :password => "rubyist_1")
-steven.save
+hunter = User.create!(:username => "hunter", :password => "rubyist_0")
+
+steven = User.create!(:username => "steven", :password => "rubyist_1")
 
 3.times do |n|
-  hunter.messages.create(:body => "This is message number #{n}.")
+  room.messages.create!(:body => "This is message number #{n}.", :user => hunter)
 end

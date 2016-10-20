@@ -13,7 +13,7 @@ html
     .container-fluid
       .row.bg-danger style="padding-top: 10px; padding-bottom: 10px;"
         .col-md-10
-          strong= "DEVELOPMENT - #{current_user.username}"
+          strong= "DEVELOPMENT - #{current_user.try(:username)}"
         .col-md-2
           .text-right= link_to "Switch account", logout_path, :method => "delete"
 

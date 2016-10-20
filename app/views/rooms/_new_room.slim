@@ -1,0 +1,15 @@
+#newRoom.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog.modal-sm role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          span &times;
+        h4.modal-title New room
+      = form_for Room.new do |f|
+        .modal-body
+          .form-group
+            = f.label :name
+            = f.text_field :name, :class => "form-control"
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+          = f.submit "Create", :class => "btn btn-primary"

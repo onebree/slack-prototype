@@ -8,7 +8,7 @@
       .modal-body
         label.control-label Available rooms to join
         .list-group
-          - rooms = Room.where.not(:id => current_user.room_ids).order(:name)
+          - rooms = Room.where.not(:id => RoomUser.select(:room_id).where(:user_id => current_user.id))
           - rooms.each do |room|
             = link_to(room_room_users_path(room), :method => :post, :class => "list-group-item") do
               = "#" + room.name

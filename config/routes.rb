@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  root "messages#index"
+  root "sessions#index"
   
   resources :rooms, :only => [:show, :create] do
-    resources :messages, :only => [:index, :create]
+    resources :room_users, :only => [:create, :destroy]
+    resources :messages,   :only => [:index, :create]
   end
 
   get "/mockup" => "messages#mockup"

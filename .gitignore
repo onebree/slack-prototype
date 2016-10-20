@@ -22,3 +22,4 @@
 
 tmp/
 .ruby-version
+.env

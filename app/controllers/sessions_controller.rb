@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  def index
+    redirect_to room_messages_path(1)
+  end
+
   def new
   end
 

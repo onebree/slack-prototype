@@ -12,10 +12,13 @@ scss:
   .col-md-2
   .col-md-10 style="border-left: 2px solid #eee;"
     .header
-      big
-        strong.pull-left(style="margin-right: 20px;")= "#" + @room.name
-        - unless @room.id == 1
-          = link_to fa_icon("sign-out"), room_room_user_path(:id => @room), :method => :delete, :class => "btn btn-default btn-xs"
+      - if @room.id == 1
+        big
+          strong(style="margin-right: 20px;")= "#" + @room.name
+      - else
+        big
+          strong.pull-left(style="margin-right: 20px;")= "#" + @room.name
+        = link_to fa_icon("sign-out"), room_room_user_path(:id => @room), :method => :delete, :class => "btn btn-default btn-xs"
 
 .row
   .col-md-2

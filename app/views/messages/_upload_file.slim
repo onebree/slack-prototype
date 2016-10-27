@@ -5,7 +5,7 @@
         button.close type="button" data-dismiss="modal"
           span &times;
         h4.modal-title Upload a file
-      = form_for [@room, Message.new] do |f|
+      = form_for [@room, Message.new], :html => { :id => "new_message_attachment" } do |f|
         .modal-body
           .form-group
             = f.label :file

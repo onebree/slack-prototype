@@ -18,6 +18,6 @@ class User < ApplicationRecord
   private
 
   def join_main_room
-    rooms.push Room.find(1)
+    Room.find(1).room_users.create(:user => self)
   end
 end

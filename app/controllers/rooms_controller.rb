@@ -5,8 +5,17 @@ class RoomsController < ApplicationController
     room = Room.new(room_params)
 
     if room.save
-      current_user.rooms.push room
-      redirect_to room_messages_path(room)
+      room.room_users.create(:user_id => current_user.id)
+
+      respond_to do |format|
+        format.html { redirect_to room_messages_path(room) }
+        format.js { render :json => room, :status => :created, :location => room_messages_path(room) }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to room_messages_path(1) }
+        format.json { render :json => room.errors.full_messages, :status => :unprocessable_entity }
+      end
     end
   end
 

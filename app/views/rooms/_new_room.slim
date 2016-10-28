@@ -1,15 +1,44 @@
-#newRoom.modal.fade tabindex="-1" role="dialog"
-  .modal-dialog.modal-sm role="document"
-    .modal-content
-      .modal-header
-        button.close type="button" data-dismiss="modal"
-          span &times;
-        h4.modal-title New room
-      = form_for Room.new do |f|
+= form_for Room.new, :remote => true, :html => { "data-type" => :json } do |f|
+  #newRoom.modal.fade tabindex="-1" role="dialog"
+    .modal-dialog.modal-sm role="document"
+      .modal-content
+        .modal-header
+          button.close.close-modal type="button" data-dismiss="modal"
+            span &times;
+          h4.modal-title New room
         .modal-body
+          #error-explanation.alert.alert-danger style="display: none;"
           .form-group
             = f.label :name
             = f.text_field :name, :class => "form-control"
         .modal-footer
-          button.btn.btn-default type="button" data-dismiss="modal" Close
+          button.btn.btn-default.close-modal type="button" data-dismiss="modal" Close
           = f.submit "Create", :class => "btn btn-primary"
+
+javascript:
+  $("form#new_room").on("ajax:success", function(event, data, status, xhr) {
+    console.log(data);
+    $("form.new_room")[0].reset();
+    $('#newRoom').modal("hide");
+    $("#error_explanation").hide();
+    location = "/rooms/" + data["id"] + "/messages";
+  });
+
+
+  $("form#new_room").on("ajax:error", function(event, xhr, status, error) {
+    var e, errors, i, len;
+    errors = jQuery.parseJSON(xhr.responseText);
+    console.log(errors)
+    $('#error_explanation').empty();
+    $('#error_explanation').append('<ul id="error_list">');
+    for (i = 0, len = errors.length; i < len; i++) {
+      e = errors[i];
+      $('#error_list').append('<li>' + e + '</li>');
+    }
+    $('#error_explanation').append('</ul>');
+    return $('#error_explanation').show();
+  });
+
+  $('.close-modal').click(function() {
+    $('#error_explanation').hide();
+  });

@@ -14,16 +14,21 @@ class MessagesController < ApplicationController
     message.user = current_user
 
     if message.save
-      ActionCable.server.broadcast "room_#{@room.id}_channel",
-                                   :message => render_message(message),
-                                   :room_id => @room.id
-      head :ok
+      if message.file
+        redirect_to room_messages_path(@room)
+      else
+        ActionCable.server.broadcast "room_#{@room.id}_channel",
+                                     :message => render_message(message),
+                                     :room_id => @room.id
 
-      message.mentions.each do |mention|
-        ActionCable.server.broadcast "room_#{@room.id}_channel_user_#{mention.id}",
-                                     :mention      => true,
-                                     :mentioned_by => message.user.username,
-                                     :room_name    => @room.name
+        head :ok
+
+        message.mentions.each do |mention|
+          ActionCable.server.broadcast "room_#{@room.id}_channel_user_#{mention.id}",
+                                       :mention      => true,
+                                       :mentioned_by => message.user.username,
+                                       :room_name    => @room.name
+        end
       end
     end
   end
@@ -34,7 +39,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:body, :file)
   end
 
   def render_message(message)

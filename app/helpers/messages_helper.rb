@@ -1,6 +1,10 @@
 module MessagesHelper
   def emojify(content, **options)
-    Twemoji.parse(h(content), options) if content.present?
+    if content.present?
+      Twemoji.parse(h(content), options)
+    else
+      ""
+    end
   end
 
   def markdown_to_html(text)

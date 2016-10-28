@@ -38,6 +38,14 @@ gem 'font-awesome-rails'
 gem 'redis'
 gem 'kramdown'
 gem 'twemoji'
+gem 'mini_magick'
+gem "refile", require: "refile/rails", :github => "madriska/refile", :branch => "rails5"
+gem "rest-client", "~> 2.0.0"
+gem "sinatra", "~> 2.0.0.beta2"
+
+group :production do
+  gem 'refile-s3'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

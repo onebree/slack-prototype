@@ -1,0 +1,18 @@
+#uploadFile.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          span &times;
+        h4.modal-title Upload a file
+      = form_for [@room, Message.new], :html => { :id => "new_message_attachment" } do |f|
+        .modal-body
+          .form-group
+            = f.label :file
+            = f.attachment_field :file
+          .form-group
+            = f.label :body, "Message (optional)"
+            = f.text_area :body, :class => "form-control", :id => "message_attachment_body"
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+          = f.submit "Upload", :class => "btn btn-primary"

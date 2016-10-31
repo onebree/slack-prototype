@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to room_messages_path(room) }
-        format.js { render :json => room, :status => :created, :location => room_messages_path(room) }
+        format.js { render :json => room, :status => :created }
       end
     else
       respond_to do |format|

@@ -18,12 +18,14 @@ ActiveRecord::Schema.define(version: 20161101200542) do
   create_table "documents", force: :cascade do |t|
     t.string   "title"
     t.integer  "user_id"
+    t.integer  "room_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "file_id"
     t.string   "file_filename"
     t.string   "file_size"
     t.string   "file_content_type"
+    t.index ["room_id"], name: "index_documents_on_room_id", using: :btree
     t.index ["user_id"], name: "index_documents_on_user_id", using: :btree
   end
 
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 20161101200542) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "documents", "rooms"
   add_foreign_key "documents", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"

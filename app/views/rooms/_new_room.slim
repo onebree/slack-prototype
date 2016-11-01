@@ -2,14 +2,42 @@
   .modal-dialog.modal-sm role="document"
     .modal-content
       .modal-header
-        button.close type="button" data-dismiss="modal"
+        button.close.close-modal type="button" data-dismiss="modal"
           span &times;
         h4.modal-title New room
-      = form_for Room.new do |f|
+      = form_for Room.new, :remote => true, :html => { "data-type" => :json } do |f|
         .modal-body
+          #error_explanation.alert.alert-danger style="display: none;"
           .form-group
             = f.label :name
             = f.text_field :name, :class => "form-control"
         .modal-footer
-          button.btn.btn-default type="button" data-dismiss="modal" Close
+          button.btn.btn-default.close-modal type="button" data-dismiss="modal" Close
           = f.submit "Create", :class => "btn btn-primary"
+
+javascript:
+  $("form#new_room").on("ajax:success", function(event, data, status, xhr) {
+    $("form.new_room")[0].reset();
+    $("#newRoom").modal("hide");
+    $("#error_explanation").hide();
+    location = "/rooms/" + data["id"] + "/messages";
+  });
+
+  $("form#new_room").on("ajax:error", function(event, xhr, status, error) {
+    var errors = jQuery.parseJSON(xhr.responseText),
+        len    = errors.length;
+
+    $("#error_explanation").empty();
+    $("#error_explanation").append("<ul id='error_list' class='list-unstyled'></ul>");
+
+    for (var i = 0; i < len; i++) {
+      var e = errors[i];
+      $("#error_list").append("<li>" + e + "</li>");
+    }
+
+    return $("#error_explanation").show();
+  });
+
+  $(".close-modal").click(function() {
+    $("#error_explanation").hide();
+  });

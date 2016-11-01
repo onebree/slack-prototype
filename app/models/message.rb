@@ -1,10 +1,8 @@
 class Message < ApplicationRecord
-  attachment :file
-
   belongs_to :user
   belongs_to :room
 
-  validates :body, :presence => true, :if => Proc.new { |m| m.file.nil? }
+  validates :body, :presence => true
 
   def mentions
     body.scan(/@(#{User::NAME_REGEX})/).flatten.map do |username|

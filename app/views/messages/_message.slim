@@ -26,5 +26,3 @@ scss:
         strong(style="margin-right: 20px;")= message.user.username
         small.text-muted(style="margin-left: 5px;")= message.created_at.strftime("%b %-d at %-l:%M %p")
       = sanitize markdown_to_html(message.body)
-      - if message.file
-        = link_to message.file_filename, message.file_url

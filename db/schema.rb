@@ -10,21 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020200853) do
+ActiveRecord::Schema.define(version: 20161101200542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "messages", force: :cascade do |t|
-    t.text     "body"
+  create_table "documents", force: :cascade do |t|
+    t.string   "title"
     t.integer  "user_id"
+    t.integer  "room_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "room_id"
     t.string   "file_id"
     t.string   "file_filename"
     t.string   "file_size"
     t.string   "file_content_type"
+    t.index ["room_id"], name: "index_documents_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_documents_on_user_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "room_id"
     t.index ["room_id"], name: "index_messages_on_room_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
@@ -49,6 +59,8 @@ ActiveRecord::Schema.define(version: 20161020200853) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "documents", "rooms"
+  add_foreign_key "documents", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "room_users", "rooms"

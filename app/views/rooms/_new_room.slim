@@ -1,11 +1,11 @@
-= form_for Room.new, :remote => true, :html => { "data-type" => :json } do |f|
-  #newRoom.modal.fade tabindex="-1" role="dialog"
-    .modal-dialog.modal-sm role="document"
-      .modal-content
-        .modal-header
-          button.close.close-modal type="button" data-dismiss="modal"
-            span &times;
-          h4.modal-title New room
+#newRoom.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog.modal-sm role="document"
+    .modal-content
+      .modal-header
+        button.close.close-modal type="button" data-dismiss="modal"
+          span &times;
+        h4.modal-title New room
+      = form_for Room.new, :remote => true, :html => { "data-type" => :json } do |f|
         .modal-body
           #error_explanation.alert.alert-danger style="display: none;"
           .form-group
